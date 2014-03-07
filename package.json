@@ -1,7 +1,7 @@
 {
   "name": "grunt-requirejs-paths",
   "description": "A helper to create your paths object in main.js for requirejs.",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "homepage": "https://github.com/pajtai/grunt-requirejs-paths",
   "author": {
     "name": "Peter Ajtai",

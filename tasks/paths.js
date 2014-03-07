@@ -9,25 +9,40 @@ module.exports = function(grunt) {
         // Merge task-specific and/or target-specific options with these defaults.
         var options = this.options({
                 pathsJson : 'paths.json',
+                pathsPrefix : '',
                 mainTemplate : 'main.template.js',
-                main : 'main.js'
+                main : 'main.js',
+                prefixComma : false
             }),
-            paths = grunt.file.readJSON(options.pathsJson),
-            template = grunt.file.read(options.mainTemplate);
+            comma = options.prefixComma ? ',' : '',
+            paths = getPathsAsArray(options.pathsJson),
+            template = grunt.file.read(options.mainTemplate),
+            pathsObject = {};
 
-        paths = createRequireJsPaths(paths);
+        _.each(paths, function(onePath) {
+            _.extend(pathsObject, createRequireJsPaths(grunt.file.readJSON(onePath)));
+        });
+
         paths = grunt.template.process(template, {
             data : {
-                paths : ' paths: \n        , paths: {\n            ' + format(paths) + '\n        }'
+                paths : ' paths: \n        ' + comma + ' paths: {\n            ' +
+                    format(pathsObject, options.pathsPrefix) + '\n        }'
             }
         });
 
         grunt.file.write(options.main, paths);
     });
 
+    function getPathsAsArray(paths) {
+        if (_.isString(paths)) {
+            return [paths];
+        }
+
+        return paths;
+    }
+
     function createRequireJsPaths(pathsTree, prefix) {
         var pathsToReturn = {};
-
         prefix = prefix || '';
 
         _.each(pathsTree, function(value, key) {
@@ -53,15 +68,16 @@ module.exports = function(grunt) {
         return '';
     }
 
-    function format(paths) {
+    function format(paths, prefix) {
         var pathsArray = [];
         _.each(paths, function(value, key) {
-             pathsArray.push(grunt.template.process("'<%= key %>' : '<%= value %>'", {
-                 data : {
-                     key : key,
-                     value : value
-                 }
-             }));
+            pathsArray.push(grunt.template.process("'<%= key %>' : '<%= prefix + value %>'", {
+                data : {
+                    key : key,
+                    value : value,
+                    prefix : prefix
+                }
+            }));
         });
         return pathsArray.join(',\n            ');
     }
