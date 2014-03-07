@@ -104,7 +104,6 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## Release History
 
-* 0.0.0 - 2014-03-06 - [initial release](https://github.com/pajtai/grunt-requirejs-paths/tree/master/release_notes/0.0.0_2014-03-06.md)
+<%= releaseNotes.notes %>
 
-
-_Compiled file. Do not modify directly. Created: 2014-03-06 05:21:22_
+_<%= warning.readme  + ' Created: ' + grunt.template.today('yyyy-mm-dd hh:MM:ss') %>_
