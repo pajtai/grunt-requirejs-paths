@@ -37,8 +37,9 @@ grunt.initConfig({
 
 ### Options
 
-* `pathsJson` - the path to a `path.json` file that defines your requirejs paths. key value pairs where the value is a
-string is used to build the paths object. You can nest as much as you want, and keys ending in a `+` a prefixed to nested keys.
+* `pathsJson` - the path or an array of paths to a json file describing part or all of the requirejs paths object. The
+json object is made of key value pairs where the value is a string or on object used to build the paths object.
+You can nest as much as you want, and keys ending in a `+` a prefixed to nested keys.
 
     ```javascript
     {
@@ -49,7 +50,7 @@ string is used to build the paths object. You can nest as much as you want, and 
     }
 
     // will produce
-    , paths : {
+    paths : {
         'exampleView' : 'app/view'
         'template' : 'text!app/template.html'
     }
@@ -57,8 +58,13 @@ string is used to build the paths object. You can nest as much as you want, and 
 
     * default : 'paths.json'
 
+* `pathsPrefix` - An optional prefix to be added before each file path. This should allow you to use the same `paths.json`
+for both regular dev and tests. For example if `app` and `tests` are sibling directories and both have a `main.js` file,
+you can use `pathsPrefix : '../app/'` for your tests.
+
 * `mainTemplate` - a template file used to generate your `main.js`, inside the template the variable `paths` is the
-outcome from `pathsJson`.
+outcome from `pathsJson`. Note that the template is put into a comment, so that jshint and syntax highlighting still work.
+When the template is processed, the paths object will come on the line after the comment.
 
     ```javascript
     // sample usage
@@ -66,16 +72,6 @@ outcome from `pathsJson`.
         'use strict';
 
         require.config({
-            packages : [
-                {
-                    name : 'underscore',
-                    location : '../vendor/lodash-amd/underscore'
-                },
-                {
-                    name : 'masseuse',
-                    location : '../vendor/masseuse/app'
-                }
-            ]
             // < %= paths %>
         });
 
@@ -95,9 +91,8 @@ outcome from `pathsJson`.
 * `main` - The path to where you want the final version of the main file to go.
     * default - `main.js`
 
-### Known Issues
-
-A comma is included at the beginning of the paths object. This will be configurable later.
+* `prefixComma` - Whether you want a comma prefixed to your paths object. For example if it comes after `packages`.
+    * default - `false`
 
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
@@ -105,6 +100,8 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 ## Release History
 
 * 0.0.0 - 2014-03-06 - [initial release](https://github.com/pajtai/grunt-requirejs-paths/tree/master/release_notes/0.0.0_2014-03-06.md)
+* 0.1.0 - 2014-03-06 - [features](https://github.com/pajtai/grunt-requirejs-paths/tree/master/release_notes/0.1.0_2014-03-06.md)
+* 0.1.1 - 2014-03-06 - [patches](https://github.com/pajtai/grunt-requirejs-paths/tree/master/release_notes/0.1.1_2014-03-06.md)
 
 
-_Compiled file. Do not modify directly. Created: 2014-03-06 05:21:22_
+_Compiled file. Do not modify directly. Created: 2014-03-06 09:16:13_

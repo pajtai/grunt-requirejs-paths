@@ -94,10 +94,6 @@ When the template is processed, the paths object will come on the line after the
 * `prefixComma` - Whether you want a comma prefixed to your paths object. For example if it comes after `packages`.
     * default - `false`
 
-### Known Issues
-
-A comma is included at the beginning of the paths object. This will be configurable later.
-
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
