@@ -1,4 +1,4 @@
-# grunt-requirejs-paths
+# grunt-requirejs-paths [![Build Status](https://travis-ci.org/Solid-Interactive/masseuse.png?branch=bower)](https://travis-ci.org/pajtai/grunt-requirejs-paths)
 
 > A helper multitask to create your paths object in main.js for requirejs
 

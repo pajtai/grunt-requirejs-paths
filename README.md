@@ -1,4 +1,4 @@
-# grunt-requirejs-paths
+# grunt-requirejs-paths [![Build Status](https://travis-ci.org/Solid-Interactive/masseuse.png?branch=bower)](https://travis-ci.org/pajtai/grunt-requirejs-paths)
 
 > A helper multitask to create your paths object in main.js for requirejs
 
@@ -102,6 +102,7 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 * 0.0.0 - 2014-03-06 - [initial release](https://github.com/pajtai/grunt-requirejs-paths/tree/master/release_notes/0.0.0_2014-03-06.md)
 * 0.1.0 - 2014-03-06 - [features](https://github.com/pajtai/grunt-requirejs-paths/tree/master/release_notes/0.1.0_2014-03-06.md)
 * 0.1.1 - 2014-03-06 - [patches](https://github.com/pajtai/grunt-requirejs-paths/tree/master/release_notes/0.1.1_2014-03-06.md)
+* 0.1.2 - 2014-03-08 - [patches](https://github.com/pajtai/grunt-requirejs-paths/tree/master/release_notes/0.1.2_2014-03-08.md)
 
 
-_Compiled file. Do not modify directly. Created: 2014-03-06 09:16:13_
+_Compiled file. Do not modify directly. Created: 2014-03-08 07:22:55_
