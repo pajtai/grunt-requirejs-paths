@@ -12,22 +12,25 @@ module.exports = function(grunt) {
                 pathsPrefix : '',
                 mainTemplate : 'main.template.js',
                 main : 'main.js',
-                prefixComma : false
+                prefixComma : false,
+                suffixComma : false,
+                data : undefined
             }),
-            comma = options.prefixComma ? ',' : '',
+            prefixComma = options.prefixComma ? ', ' : '',
+            suffixComma = options.suffixComma ? ',' : '',
             paths = getPathsAsArray(options.pathsJson),
             template = grunt.file.read(options.mainTemplate),
             pathsObject = {};
 
         _.each(paths, function(onePath) {
-            _.extend(pathsObject, createRequireJsPaths(grunt.file.readJSON(onePath)));
+            _.extend(pathsObject, createRequireJsPaths(options.data, grunt.file.readJSON(onePath)));
         });
 
         paths = grunt.template.process(template, {
-            data : {
-                paths : ' paths: \n        ' + comma + ' paths: {\n            ' +
-                    format(pathsObject, options.pathsPrefix) + '\n        }'
-            }
+            data : _.extend({
+                paths : ' paths: \n        ' + prefixComma + 'paths: {\n            ' +
+                    format(pathsObject, options.pathsPrefix) + '\n        }' + suffixComma
+            }, options.data)
         });
 
         grunt.file.write(options.main, paths);
@@ -41,7 +44,7 @@ module.exports = function(grunt) {
         return paths;
     }
 
-    function createRequireJsPaths(pathsTree, prefix) {
+    function createRequireJsPaths(data, pathsTree, prefix) {
         var pathsToReturn = {};
         prefix = prefix || '';
 
@@ -49,16 +52,24 @@ module.exports = function(grunt) {
 
             if (_.isString(value)) {
                 if (! pathsToReturn[key]) {
-                    pathsToReturn[prefix + key] = value;
+                    pathsToReturn[process(prefix + key, data)] = process(value, data);
                 } else {
                     grunt.fail.warn('Duplicate paths entry for: "' + key + '"');
                 }
             } else {
                 grunt.log.writeln("fetching paths for: " + key);
-                pathsToReturn = _.extend(pathsToReturn, createRequireJsPaths(value, getPrefix(key)));
+                pathsToReturn = _.extend(pathsToReturn, createRequireJsPaths(data, value, getPrefix(key)));
             }
         });
         return pathsToReturn;
+    }
+
+    function process(template, data) {
+        var args = [template];
+        if (data) {
+            args.push({ data : data });
+        }
+        return grunt.template.process.apply(grunt, args);
     }
 
     function getPrefix(key) {

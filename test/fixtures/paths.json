@@ -1,0 +1,6 @@
+{
+    "test+" : {
+        "" : "one",
+        "Item" : "one/two"
+    }
+}
