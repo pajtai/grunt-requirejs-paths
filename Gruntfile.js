@@ -16,34 +16,34 @@ module.exports = function (grunt) {
             }
         },
         paths : {
-            test1 : {
+            testSimple : {
                 options : {
-                    pathsJson : 'test/fixtures/paths.json',
-                    mainTemplate : 'test/fixtures/main1.template.js',
-                    main : 'test/build/main1.js'
+                    pathsJson : 'test/fixtures/simple.json',
+                    mainTemplate : 'test/fixtures/simple.template.js',
+                    main : 'test/build/simple.js'
                 }
             },
-            test2 : {
+            testPrefixComma : {
                 options : {
-                    pathsJson : 'test/fixtures/paths.json',
-                    mainTemplate : 'test/fixtures/main2.template.js',
-                    main : 'test/build/main2.js',
+                    pathsJson : 'test/fixtures/simple.json',
+                    mainTemplate : 'test/fixtures/prefixComma.template.js',
+                    main : 'test/build/prefixComma.js',
                     prefixComma : true
                 }
             },
-            test3 : {
+            testSuffixComma : {
                 options : {
-                    pathsJson : 'test/fixtures/paths.json',
-                    mainTemplate : 'test/fixtures/main3.template.js',
-                    main : 'test/build/main3.js',
+                    pathsJson : 'test/fixtures/simple.json',
+                    mainTemplate : 'test/fixtures/suffixComma.template.js',
+                    main : 'test/build/suffixComma.js',
                     suffixComma : true
                 }
             },
-            test4 : {
+            testTemplating : {
                 options : {
-                    pathsJson : 'test/fixtures/paths2.json',
-                    mainTemplate : 'test/fixtures/main1.template.js',
-                    main : 'test/build/main4.js',
+                    pathsJson : 'test/fixtures/templating.json',
+                    mainTemplate : 'test/fixtures/simple.template.js',
+                    main : 'test/build/templating.js',
                     data : {
                         platform : 'mobile'
                     }
