@@ -94,6 +94,25 @@ When the template is processed, the paths object will come on the line after the
 * `prefixComma` - Whether you want a comma prefixed to your paths object. For example if it comes after `packages`.
     * default - `false`
 
+* `data` - Arbitrary data that you want interpolated into the file.
+    * default - `{}`
+
+    If you have this in your template:
+    ```javascript
+    var someConfigObj = {
+        importantProperty : '<%= portlandOregon &>'
+    };
+    ```
+    You can include the `australianAccent` into the file by including it on the grunt config options object like so:
+    ```javascript
+    options: {
+        data : {
+            portlandOregon : 'The Coolest Place On Earth'
+        }
+    }
+    ```
+
+
 ## Contributing
 In lieu of a formal styleguide, take care to maintain the existing coding style. Add unit tests for any new or changed functionality. Lint and test your code using [Grunt](http://gruntjs.com/).
 
